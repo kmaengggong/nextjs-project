@@ -1,8 +1,8 @@
 export type Chara = {
 	chara_id: string;
 	color: string;
-	created_at: Date;
-	updated_at: Date;
+	created_at: string;
+	updated_at: string;
 };
 
 export type CharaTrans = {
@@ -11,10 +11,16 @@ export type CharaTrans = {
 	full_name: string;
 	short_name: string;
 	description: string;
+	created_at: string;
+	updated_at: string;
 };
 
 export type CharaLinks = {
 	chara_id: string;
+	platform: string;
+	url: string;
+	created_at: string;
+	updated_at: string;
 };
 
 export type Guest = {
@@ -23,14 +29,15 @@ export type Guest = {
 	temp_name: string;
 	ip_addr: string;
 	content: string;
-	created_at: Date;
-	updated_at: Date;
+	created_at: string;
+	updated_at: string;
 };
 
 export type GuestLikes = {
 	guest_id: string;
 	ip_addr: string;
-	liked_at: Date;
+	created_at: string;
+	updated_at: string;
 };
 
 export type Stats = {
@@ -38,8 +45,8 @@ export type Stats = {
 	chara_a_id: string;
 	chara_b_id: string;
 	ip_addr: string;
-	created_at: Date;
-	updated_at: Date;
+	created_at: string;
+	updated_at: string;
 };
 
 export type Notes = {
