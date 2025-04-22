@@ -2,36 +2,62 @@ import { NextRequest, NextResponse } from "next/server";
 import { sql } from "@vercel/postgres";
 import { getClientIP } from "@/app/utils/request";
 
-export async function GET(
-	req: NextRequest,
-) {
+export async function GET(req: NextRequest) {
 	try {
 		const { searchParams } = new URL(req.url);
 		const lang = searchParams.get("lang") ?? "EN";
+		const col = searchParams.get("col") ?? "COUNT";
+		let data;
 
-		const data = await sql`
-			SELECT
-				CONCAT(CT1.SHORT_NAME, CT2.SHORT_NAME) AS CHARA_PAIR,
-				C1.COLOR AS CHARA_A_COLOR,
-				C2.COLOR AS CHARA_B_COLOR,
-				COUNT(S.STATS_ID) AS STATS_COUNT
-			FROM
-				STATS AS S
-				INNER JOIN CHARA AS C1 ON S.CHARA_A_ID = C1.CHARA_ID
-				INNER JOIN CHARA AS C2 ON S.CHARA_B_ID = C2.CHARA_ID
-				INNER JOIN CHARA_TRANS AS CT1 ON C1.CHARA_ID = CT1.CHARA_ID
-					AND CT1.LANG = ${lang}
-				INNER JOIN CHARA_TRANS AS CT2 ON C2.CHARA_ID = CT2.CHARA_ID
-					AND CT2.LANG = ${lang}
-			GROUP BY
-				S.CHARA_A_ID,
-				S.CHARA_B_ID,
-				CT1.SHORT_NAME,
-				CT2.SHORT_NAME,
-				C1.COLOR,
-				C2.COLOR
-			ORDER BY STATS_COUNT DESC
-		`;
+		if (col === "NAME") {
+			data = await sql`
+				SELECT
+					CONCAT(CT1.SHORT_NAME, CT2.SHORT_NAME) AS CHARA_PAIR,
+					C1.COLOR AS CHARA_A_COLOR,
+					C2.COLOR AS CHARA_B_COLOR,
+					COUNT(S.STATS_ID) AS STATS_COUNT
+				FROM
+					STATS AS S
+					INNER JOIN CHARA AS C1 ON S.CHARA_A_ID = C1.CHARA_ID
+					INNER JOIN CHARA AS C2 ON S.CHARA_B_ID = C2.CHARA_ID
+					INNER JOIN CHARA_TRANS AS CT1 ON C1.CHARA_ID = CT1.CHARA_ID
+						AND CT1.LANG = ${lang}
+					INNER JOIN CHARA_TRANS AS CT2 ON C2.CHARA_ID = CT2.CHARA_ID
+						AND CT2.LANG = ${lang}
+				GROUP BY
+					S.CHARA_A_ID,
+					S.CHARA_B_ID,
+					CT1.SHORT_NAME,
+					CT2.SHORT_NAME,
+					C1.COLOR,
+					C2.COLOR
+				ORDER BY CHARA_PAIR ASC
+			`;
+		} else {
+			data = await sql`
+				SELECT
+					CONCAT(CT1.SHORT_NAME, CT2.SHORT_NAME) AS CHARA_PAIR,
+					C1.COLOR AS CHARA_A_COLOR,
+					C2.COLOR AS CHARA_B_COLOR,
+					COUNT(S.STATS_ID) AS STATS_COUNT
+				FROM
+					STATS AS S
+					INNER JOIN CHARA AS C1 ON S.CHARA_A_ID = C1.CHARA_ID
+					INNER JOIN CHARA AS C2 ON S.CHARA_B_ID = C2.CHARA_ID
+					INNER JOIN CHARA_TRANS AS CT1 ON C1.CHARA_ID = CT1.CHARA_ID
+						AND CT1.LANG = ${lang}
+					INNER JOIN CHARA_TRANS AS CT2 ON C2.CHARA_ID = CT2.CHARA_ID
+						AND CT2.LANG = ${lang}
+				GROUP BY
+					S.CHARA_A_ID,
+					S.CHARA_B_ID,
+					CT1.SHORT_NAME,
+					CT2.SHORT_NAME,
+					C1.COLOR,
+					C2.COLOR
+				ORDER BY STATS_COUNT DESC
+			`;
+		}
 
 		return NextResponse.json(data.rows);
 	} catch (error) {

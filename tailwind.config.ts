@@ -11,8 +11,9 @@ export default {
 			colors: {
 				background: "var(--background)",
 				foreground: "var(--foreground)",
-				// TODO: 순서 변경
+				
 				"mygo-color": "#77BBDD",
+				"mygo-dark-color": "#3377AA",
 				"tomori-color": "#77BBDD",
 				"anon-color": "#FF8899",
 				"rana-color": "#77DD77",
@@ -20,20 +21,21 @@ export default {
 				"taki-color": "#7777AA",
 
 				"mujica-color": "#BB9955",
-				"uika-color": "#779977",
-				"sakiko-color": "#335566",
-				"umiri-color": "#AA4477",
-				"mutsumi-color": "#7799CC",
+				"uika-color": "#BB9955",
+				"mutsumi-color": "#779977",
+				"umiri-color": "#335566",
+				"nyamu-color": "#AA4477",
+				"sakiko-color": "#7799CC",
 			},
 			fontFamily: {
 				main: ['"'],
 			},
 			screens: {
-				'xs': '400px',
-				'sm': '640px',
-				'md': '768px',
-				'lg': '1024px',
-				'xl': '1280px',
+				xs: "400px",
+				sm: "640px",
+				md: "768px",
+				lg: "1024px",
+				xl: "1280px",
 			},
 		},
 	},
