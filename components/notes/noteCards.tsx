@@ -1,7 +1,7 @@
 "use client";
 
 import { Notes } from "@/app/lib/definitions";
-import { formatDateTime } from "@/app/utils/time";
+import { formatDateLong } from "@/app/utils/time";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Pagination from "@/components/notes/pagination";
@@ -53,7 +53,7 @@ export default function NoteCards() {
 								<div className="flex justify-between items-center mb-2 cursor-pointer">
 									<a
 										onClick={() => router.push(`notes/${note.notes_id}`)}
-										className="text-md font-semibold hover:underline hover:decoration-mygo-dark-color hover:text-mygo-dark-color decoration-2"
+										className="text-md font-semibold hover:underline hove1r:decoration-mygo-dark-color hover:text-mygo-dark-color decoration-2"
 									>
 										{note.title}
 									</a>
@@ -66,7 +66,7 @@ export default function NoteCards() {
 									>
 										일반
 									</a>{" "}
-									| <span>{formatDateTime(note.updated_at)}</span>
+									| <span>{formatDateLong(note.updated_at)}</span>
 								</div>
 							</div>
 						))}

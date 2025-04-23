@@ -1,7 +1,7 @@
 "use client";
 
 import { Notes } from "@/app/lib/definitions";
-import { formatDateTime } from "@/app/utils/time";
+import { formatDateLong } from "@/app/utils/time";
 import { useEffect, useState } from "react";
 
 export default function NoteCardDetail({ id }: { id: string }) {
@@ -59,7 +59,7 @@ export default function NoteCardDetail({ id }: { id: string }) {
 									>
 										일반
 									</a>{" "}
-									| <span>{formatDateTime(note.updated_at)}</span>
+									| <span>{formatDateLong(note.updated_at)}</span>
 								</div>
 							</div>
 						}

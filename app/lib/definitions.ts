@@ -31,6 +31,8 @@ export type Guest = {
 	content: string;
 	created_at: string;
 	updated_at: string;
+
+	color: string;
 };
 
 export type GuestLikes = {
