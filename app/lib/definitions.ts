@@ -8,7 +8,8 @@ export type Chara = {
 export type CharaTrans = {
 	chara_id: string;
 	lang: "KR" | "EN" | "JP";
-	full_name: string;
+	first_name: string;
+	last_name: string;
 	short_name: string;
 	description: string;
 	created_at: string;
@@ -22,6 +23,14 @@ export type CharaLinks = {
 	created_at: string;
 	updated_at: string;
 };
+
+export type CharaWithTrans = {
+	chara_id: string;
+	color: string;
+	first_name: string;
+	last_name: string;
+	short_name: string;
+}
 
 export type Guest = {
 	guest_id: string;

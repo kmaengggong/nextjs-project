@@ -21,7 +21,7 @@ export default function GuestCards() {
 					const json = await res.json();
 					setGuests(json);
 				} else {
-					alert("Failed to fetch notes");
+					alert("Failed to fetch guest");
 				}
 			} catch (error) {
 				console.error("Fetch error: ", error);
@@ -42,12 +42,12 @@ export default function GuestCards() {
 						<motion.div
 							layoutId={`guest-${guest.guest_id}`}
 							key={guest.guest_id}
-							className="mb-2 break-inside-avoid px-6 py-4 border rounded-lg border-mygo-dark-color backdrop-blur-lg text-gray-800 cursor-pointer"
+							className="mb-2 break-inside-avoid px-6 py-4 border rounded-lg border-mygo-dark-color backdrop-blur-lg text-gray-800 text-sm cursor-pointer"
 							style={{ backgroundColor: hexToRGBA(guest.color, 0.5) }}
 							onClick={() => setSelectedGuest(guest)}
 						>
-							<p className="text-sm break-words mb-4">{guest.content}</p>
-							<p className="text-sm font-semibold text-right">
+							<p className="break-words mb-4">{guest.content}</p>
+							<p className="font-semibold text-right">
 								- {guest.temp_name}
 							</p>
 						</motion.div>

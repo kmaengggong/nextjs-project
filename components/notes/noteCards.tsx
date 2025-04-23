@@ -59,7 +59,7 @@ export default function NoteCards() {
 									</a>
 								</div>
 								<p className="line-clamp-3 text-sm mb-4">{note.content}</p>
-								<div className="text-sm text-gray-500">
+								<div className="text-sm text-gray-600">
 									<a
 										href="#"
 										className="text-md font-semibold text-mygo-dark-color decoration-2"

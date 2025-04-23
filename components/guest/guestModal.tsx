@@ -2,6 +2,7 @@
 
 import { Guest } from "@/app/lib/definitions";
 import { hexToRGBA } from "@/app/utils/color";
+import { formatDateLong } from "@/app/utils/time";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect } from "react";
 
@@ -32,16 +33,17 @@ export default function GuestModal({ guest, onClose }: GuestModalProps) {
 				>
 					<motion.div
 						layoutId={`guest-${guest.guest_id}`}
-						className="relative w-full mx-4 px-6 py-4 border-4 border-mygo-dark-color rounded-lg"
+						className="relative w-full mx-4 px-6 py-4 border border-mygo-dark-color rounded-lg text-gray-800 text-base"
 						style={{ backgroundColor: hexToRGBA(guest.color, 0.9) }}
 						onClick={(e) => e.stopPropagation()}
 					>
-						<p className="text-base text-gray-800 whitespace-pre-wrap mb-6">
+						<p className="whitespace-pre-wrap mb-6">
 							{guest.content}
 						</p>
-						<p className="text-sm font-semibold text-right text-gray-700">
-							- {guest.temp_name}
-						</p>
+						<div className="flex justify-between text-sm">
+							<p className="text-gray-600">{formatDateLong(guest.updated_at)}</p>
+							<p className="font-semibold">- {guest.temp_name}</p>
+						</div>
 					</motion.div>
 				</motion.div>
 			)}

@@ -5,7 +5,8 @@ import { formatDateLong } from "@/app/utils/time";
 import { useEffect, useState } from "react";
 
 export default function NoteCardDetail({ id }: { id: string }) {
-	const [note, setNote] = useState<Notes | null>(null);const [loading, setLoading] = useState(true);
+	const [note, setNote] = useState<Notes | null>(null);
+	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -16,7 +17,7 @@ export default function NoteCardDetail({ id }: { id: string }) {
 					console.log(json);
 					setNote(json);
 				} else {
-					alert("Failed to fetch guest");
+					alert("Failed to fetch notes");
 				}
 			} catch (error) {
 				console.error("Fetch error: ", error);
@@ -40,29 +41,25 @@ export default function NoteCardDetail({ id }: { id: string }) {
 				</div>
 			) : (
 				<div className="divide-y divide-mygo-dark-color">
-					{note &&
-							<div key={note.notes_id} className="px-6 py-4 min-h-[80vh]">
-								<div className="flex justify-between items-center mb-2">
-									<p
-										className="text-md font-semibold"
-									>
-										{note.title}
-									</p>
-								</div>
-
-								<p className="text-sm mb-4">{note.content}</p>
-
-								<div className="text-sm text-gray-500">
-									<a
-										href="#"
-										className="text-md font-semibold text-mygo-dark-color decoration-2"
-									>
-										일반
-									</a>{" "}
-									| <span>{formatDateLong(note.updated_at)}</span>
-								</div>
+					{note && (
+						<div key={note.notes_id} className="px-6 py-4 min-h-[80vh]">
+							<div className="flex justify-between items-center mb-2">
+								<p className="text-md font-semibold">{note.title}</p>
 							</div>
-						}
+
+							<p className="text-sm mb-4">{note.content}</p>
+
+							<div className="text-sm text-gray-600">
+								<a
+									href="#"
+									className="text-md font-semibold text-mygo-dark-color decoration-2"
+								>
+									일반
+								</a>{" "}
+								| <span>{formatDateLong(note.updated_at)}</span>
+							</div>
+						</div>
+					)}
 				</div>
 			)}
 		</div>

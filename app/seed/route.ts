@@ -49,7 +49,8 @@ async function seedCharaTrans() {
 		CREATE TABLE IF NOT EXISTS CHARA_TRANS (
 			CHARA_ID UUID NOT NULL,
 			LANG CHAR(2) CHECK (LANG IN ('KR', 'EN', 'JP')),
-			FULL_NAME TEXT,
+			FIRST_NAME TEXT,
+			LAST_NAME TEXT,
 			SHORT_NAME TEXT,
 			DESCRIPTION TEXT,
 			CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -71,11 +72,19 @@ async function seedCharaTrans() {
 	const insertedCharaLinks = await Promise.all([
 		chara_trans_kr.map(async (trans, i) => {
 			return client.sql`
-				INSERT INTO CHARA_TRANS (CHARA_ID, LANG, FULL_NAME, SHORT_NAME, DESCRIPTION)
+				INSERT INTO CHARA_TRANS (
+					CHARA_ID,
+					LANG,
+					FIRST_NAME,
+					LAST_NAME,
+					SHORT_NAME,
+					DESCRIPTION
+				)
 				VALUES (
 					${charas[i].chara_id},
 					${"KR"},
-					${trans.full_name},
+					${trans.first_name},
+					${trans.last_name},
 					${trans.short_name},
 					${trans.description}
 				)
@@ -83,11 +92,19 @@ async function seedCharaTrans() {
 		}), 
 		chara_trans_en.map(async (trans, i) => {
 			return client.sql`
-				INSERT INTO CHARA_TRANS (CHARA_ID, LANG, FULL_NAME, SHORT_NAME, DESCRIPTION)
+				INSERT INTO CHARA_TRANS (
+					CHARA_ID,
+					LANG,
+					FIRST_NAME,
+					LAST_NAME,
+					SHORT_NAME,
+					DESCRIPTION
+				)
 				VALUES (
 					${charas[i].chara_id},
 					${"EN"},
-					${trans.full_name},
+					${trans.first_name},
+					${trans.last_name},
 					${trans.short_name},
 					${trans.description}
 				)
@@ -95,11 +112,19 @@ async function seedCharaTrans() {
 		}),
 		chara_trans_jp.map(async (trans, i) => {
 			return client.sql`
-				INSERT INTO CHARA_TRANS (CHARA_ID, LANG, FULL_NAME, SHORT_NAME, DESCRIPTION)
+				INSERT INTO CHARA_TRANS (
+					CHARA_ID,
+					LANG,
+					FIRST_NAME,
+					LAST_NAME,
+					SHORT_NAME,
+					DESCRIPTION
+				)
 				VALUES (
 					${charas[i].chara_id},
 					${"JP"},
-					${trans.full_name},
+					${trans.first_name},
+					${trans.last_name},
 					${trans.short_name},
 					${trans.description}
 				)
