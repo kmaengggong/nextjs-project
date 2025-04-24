@@ -54,7 +54,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
 	return (
 		<html lang="en">
-			<body className="overflow-x-hidden min-h-screen m-0 flex flex-col items-center overflow-y-scroll scrollbar-hide bg-pink-300 overscroll-none">
+			<body className="overflow-x-hidden min-h-screen m-0 flex flex-col items-center overflow-y-scroll scrollbar-hide bg-mygo-color overscroll-none">
 				<div className="max-w-screen-md w-full relative">
 					<motion.div
 						style={{

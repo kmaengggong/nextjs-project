@@ -3,6 +3,7 @@
 import { Notes } from "@/app/lib/definitions";
 import { formatDateLong } from "@/app/utils/time";
 import { useEffect, useState } from "react";
+import NoteCardDetailSkeleton from "./noteCardDetailSkeleton";
 
 export default function NoteCardDetail({ id }: { id: string }) {
 	const [note, setNote] = useState<Notes | null>(null);
@@ -11,10 +12,9 @@ export default function NoteCardDetail({ id }: { id: string }) {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const res = await fetch(`/api/notes/${id}`, { method: "GET" });
+				const res = await fetch(`/api/notes/${id}`);
 				if (res.ok) {
 					const json = await res.json();
-					console.log(json);
 					setNote(json);
 				} else {
 					alert("Failed to fetch notes");
@@ -31,33 +31,43 @@ export default function NoteCardDetail({ id }: { id: string }) {
 	return (
 		<div className="overflow-hidden border rounded-lg border-mygo-dark-color bg-white/20 backdrop-blur-lg text-gray-800">
 			{loading ? (
-				<div className="divide-y divide-mygo-dark-color animate-pulse">
-					<div className="px-6 py-4 space-y-3 min-h-[80vh]">
-						<div className="h-4 bg-gray-200/40 rounded w-2/3"></div>
-						<div className="h-3 bg-gray-200/40 rounded w-full"></div>
-						<div className="h-3 bg-gray-200/40 rounded w-5/6"></div>
-						<div className="h-3 bg-gray-200/40 rounded w-1/3 mt-3"></div>
-					</div>
-				</div>
+				<NoteCardDetailSkeleton />
 			) : (
 				<div className="divide-y divide-mygo-dark-color">
 					{note && (
 						<div key={note.notes_id} className="px-6 py-4 min-h-[80vh]">
-							<div className="flex justify-between items-center mb-2">
-								<p className="text-md font-semibold">{note.title}</p>
-							</div>
-
-							<p className="text-sm mb-4">{note.content}</p>
-
-							<div className="text-sm text-gray-600">
+							<div className="flex flex-row justify-between">
+								<p className="text-sm text-gray-600">
+									{formatDateLong(note.updated_at)}
+								</p>
 								<a
 									href="#"
-									className="text-md font-semibold text-mygo-dark-color decoration-2"
+									className="text-sm font-semibold text-mygo-dark-color decoration-2"
 								>
 									일반
-								</a>{" "}
-								| <span>{formatDateLong(note.updated_at)}</span>
+								</a>
 							</div>
+
+							<div className="flex justify-between items-center mb-2">
+								<p className="text-lg sm:text-xl font-bold">{note.title}</p>
+							</div>
+
+							<hr className="mb-1 border-gray-800" />
+
+							<a
+								href={
+									note.origin_url.startsWith("http")
+										? note.origin_url
+										: `https://${note.origin_url}`
+								}
+								className="block text-sm text-mygo-dark-color mb-6 text-right"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								{note.origin_url}
+							</a>
+
+							<p className="text-sm mb-4">{note.content}</p>
 						</div>
 					)}
 				</div>

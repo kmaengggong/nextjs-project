@@ -33,14 +33,14 @@ export default function GuestModal({ guest, onClose }: GuestModalProps) {
 				>
 					<motion.div
 						layoutId={`guest-${guest.guest_id}`}
-						className="relative w-full mx-4 px-6 py-4 border border-mygo-dark-color rounded-lg text-gray-800 text-base"
+						className="relative w-full mx-4 px-6 py-4 border border-mygo-dark-color rounded-lg text-gray-800 text-sm sm:text-base"
 						style={{ backgroundColor: hexToRGBA(guest.color, 0.9) }}
 						onClick={(e) => e.stopPropagation()}
 					>
 						<p className="whitespace-pre-wrap mb-6">
 							{guest.content}
 						</p>
-						<div className="flex justify-between text-sm">
+						<div className="flex justify-between">
 							<p className="text-gray-600">{formatDateLong(guest.updated_at)}</p>
 							<p className="font-semibold">- {guest.temp_name}</p>
 						</div>

@@ -1,11 +1,11 @@
 "use client";
 
-import { CharaWithTrans } from "@/app/lib/definitions";
+import { CharaDetail } from "@/app/lib/definitions";
 import { hexToRGBA } from "@/app/utils/color";
 import { useEffect, useState } from "react";
 
 export default function GuestRegist() {
-	const [charas, setCharas] = useState<CharaWithTrans[] | null>(null);
+	const [charas, setCharas] = useState<CharaDetail[] | null>([]);
 	const [selectedCharaId, setSelectedCharaId] = useState<string | null>(null);
 	const [focused, setFocused] = useState(false);
 

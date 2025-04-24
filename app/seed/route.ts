@@ -1,5 +1,6 @@
 import { db } from "@vercel/postgres";
 import {
+	bands,
 	charas,
 	chara_trans_kr,
 	chara_trans_en,
@@ -10,9 +11,37 @@ import {
 	stats,
 } from "../lib/placeholder-data";
 import { NextRequest } from "next/server";
-import { Chara } from "../lib/definitions";
+import { Bands, Chara } from "../lib/definitions";
 
 const client = await db.connect();
+
+async function seedBands() {
+	await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
+
+	await client.sql`
+		CREATE TABLE IF NOT EXISTS BANDS (
+			BANDS_ID UUID DEFAULT UUID_GENERATE_V4() PRIMARY KEY,
+			BAND_NAME TEXT,
+			CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+			UPDATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+		)
+	`;
+
+	const result = await client.sql`SELECT COUNT(*) FROM BANDS`;
+	const count = Number(result.rows[0].count);
+	if (count > 0) return;
+
+	const insertedBands = await Promise.all(
+		bands.map(async (band) => {
+			return client.sql`
+				INSERT INTO BANDS (BAND_NAME)
+				VALUES (${band.band_name})
+			`;
+		})
+	);
+
+	return insertedBands;
+}
 
 async function seedChara() {
 	await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
@@ -20,9 +49,14 @@ async function seedChara() {
 	await client.sql`
 		CREATE TABLE IF NOT EXISTS CHARA (
 			CHARA_ID UUID DEFAULT UUID_GENERATE_V4() PRIMARY KEY,
+			BANDS_ID UUID,
 			COLOR VARCHAR(7),
+			CHARA_IMAGE TEXT,
+			VOICE_IMAGE TEXT,
 			CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-			UPDATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+			UPDATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+			CONSTRAINT FK_BANDS FOREIGN KEY (BANDS_ID) REFERENCES BANDS(BANDS_ID)
 		)
 	`;
 
@@ -30,11 +64,16 @@ async function seedChara() {
 	const count = Number(result.rows[0].count);
 	if (count > 0) return;
 
+	const resultBands = await client.sql<Bands>`SELECT * FROM BANDS`;
+	const bands = resultBands.rows;
+	if (bands.length < 1) return;
+
 	const insertedChara = await Promise.all(
-		charas.map(async (chara) => {
+		charas.map(async (chara, index) => {
+			const bandsId = index < 5 ? bands[0].bands_id : bands[1].bands_id;
 			return client.sql`
-				INSERT INTO CHARA (COLOR)
-				VALUES (${chara.color})
+				INSERT INTO CHARA (BANDS_ID, COLOR, CHARA_IMAGE, VOICE_IMAGE)
+				VALUES (${bandsId}, ${chara.color}, ${chara.chara_image}, ${chara.voice_image})
 			`;
 		})
 	);
@@ -52,7 +91,9 @@ async function seedCharaTrans() {
 			FIRST_NAME TEXT,
 			LAST_NAME TEXT,
 			SHORT_NAME TEXT,
+			VOICE_NAME TEXT,
 			DESCRIPTION TEXT,
+			VOICE_DESCRIPTION TEXT,
 			CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 			UPDATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
@@ -78,7 +119,9 @@ async function seedCharaTrans() {
 					FIRST_NAME,
 					LAST_NAME,
 					SHORT_NAME,
-					DESCRIPTION
+					VOICE_NAME,
+					DESCRIPTION,
+					VOICE_DESCRIPTION
 				)
 				VALUES (
 					${charas[i].chara_id},
@@ -86,7 +129,9 @@ async function seedCharaTrans() {
 					${trans.first_name},
 					${trans.last_name},
 					${trans.short_name},
-					${trans.description}
+					${trans.voice_name},
+					${trans.description},
+					${trans.voice_description}
 				)
 			`;
 		}), 
@@ -98,7 +143,9 @@ async function seedCharaTrans() {
 					FIRST_NAME,
 					LAST_NAME,
 					SHORT_NAME,
-					DESCRIPTION
+					VOICE_NAME,
+					DESCRIPTION,
+					VOICE_DESCRIPTION
 				)
 				VALUES (
 					${charas[i].chara_id},
@@ -106,7 +153,9 @@ async function seedCharaTrans() {
 					${trans.first_name},
 					${trans.last_name},
 					${trans.short_name},
-					${trans.description}
+					${trans.voice_name},
+					${trans.description},
+					${trans.voice_description}
 				)
 			`;
 		}),
@@ -118,7 +167,9 @@ async function seedCharaTrans() {
 					FIRST_NAME,
 					LAST_NAME,
 					SHORT_NAME,
-					DESCRIPTION
+					VOICE_NAME,
+					DESCRIPTION,
+					VOICE_DESCRIPTION
 				)
 				VALUES (
 					${charas[i].chara_id},
@@ -126,7 +177,9 @@ async function seedCharaTrans() {
 					${trans.first_name},
 					${trans.last_name},
 					${trans.short_name},
-					${trans.description}
+					${trans.voice_name},
+					${trans.description},
+					${trans.voice_description}
 				)
 			`;
 		})
@@ -281,6 +334,7 @@ async function seedNotes() {
 			TITLE TEXT NOT NULL,
 			CONTENT TEXT NOT NULL,
 			VIEW INT DEFAULT 0,
+			ORIGIN_URL TEXT,
 			CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 			UPDATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 		)
@@ -293,8 +347,8 @@ async function seedNotes() {
 	const insertedNotes = await Promise.all(
 		notes.map(async (note) => {
 			return client.sql`
-				INSERT INTO NOTES (TITLE, CONTENT)
-				VALUES (${note.title}, ${note.content})
+				INSERT INTO NOTES (TITLE, CONTENT, ORIGIN_URL)
+				VALUES (${note.title}, ${note.content}, ${note.origin_url})
 			`;
 		})
 	);
@@ -305,6 +359,7 @@ async function seedNotes() {
 export async function GET(req: NextRequest) {
 	try {
 		await client.sql`BEGIN`;
+		await seedBands();
 		await seedChara();
 		await seedCharaTrans();
 		await seedCharaLinks();

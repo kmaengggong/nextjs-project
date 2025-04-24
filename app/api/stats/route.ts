@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { sql } from "@vercel/postgres";
-import { getClientIP } from "@/app/utils/request";
+import { StatsResult } from "@/app/lib/definitions";
 
 export async function GET(req: NextRequest) {
 	try {
@@ -10,7 +10,7 @@ export async function GET(req: NextRequest) {
 		let data;
 
 		if (col === "NAME") {
-			data = await sql`
+			data = await sql<StatsResult>`
 				SELECT
 					CONCAT(CT1.SHORT_NAME, CT2.SHORT_NAME) AS CHARA_PAIR,
 					C1.COLOR AS CHARA_A_COLOR,
@@ -34,7 +34,7 @@ export async function GET(req: NextRequest) {
 				ORDER BY CHARA_PAIR ASC
 			`;
 		} else {
-			data = await sql`
+			data = await sql<StatsResult>`
 				SELECT
 					CONCAT(CT1.SHORT_NAME, CT2.SHORT_NAME) AS CHARA_PAIR,
 					C1.COLOR AS CHARA_A_COLOR,

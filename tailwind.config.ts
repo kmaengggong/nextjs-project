@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import plugin from "tailwindcss/plugin";
 
 export default {
 	content: [
@@ -11,7 +12,7 @@ export default {
 			colors: {
 				background: "var(--background)",
 				foreground: "var(--foreground)",
-				
+
 				"mygo-color": "#77BBDD",
 				"mygo-dark-color": "#3377AA",
 				"tomori-color": "#77BBDD",
@@ -39,5 +40,15 @@ export default {
 			},
 		},
 	},
-	plugins: [require("tailwind-scrollbar-hide")],
+	// eslint-disable-next-line @typescript-eslint/no-require-imports
+	plugins: [
+		require("tailwind-scrollbar-hide"),
+		plugin(function ({ addUtilities }) {
+			addUtilities({
+				".backface-hidden": {
+					backfaceVisibility: "hidden",
+				},
+			});
+		}),
+	],
 } satisfies Config;

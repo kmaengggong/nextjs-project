@@ -31,10 +31,23 @@
 /about: simple self-produce page.  // no db
 /ccmbr: hidden page for ave mujica. with mutsumi.  // no db
 
-### !
-- navbar 약간 다이나믹 아일랜드 비슷하게?
 
 ### TODO
+- skeleton design -> responsive
+- navbar design
+
+
+
+
+
+
+
+
+
+
+
+
+
 - index
 	- 음악 재생
 	- 이미지 대체
@@ -43,7 +56,7 @@
 	+ DB 연결
 	- 디자인 수정
 - notes
-	- 디자인
+	- 카테고리
 	- 크롤링
 - stats
 	- 투표

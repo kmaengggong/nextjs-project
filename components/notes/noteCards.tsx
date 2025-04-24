@@ -2,21 +2,30 @@
 
 import { Notes } from "@/app/lib/definitions";
 import { formatDateLong } from "@/app/utils/time";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import Pagination from "@/components/notes/pagination";
 import NoteCardSkeleton from "./noteCardSkeleton";
 
-const PAGE_SIZE = 5;
+const PAGE_SIZE = 10;
 
 export default function NoteCards() {
 	const router = useRouter();
+	const searchParams = useSearchParams();
+	const pageParam = parseInt(searchParams.get("page") || "1", 10);
+
 	const [notes, setNotes] = useState<Notes[]>([]);
 	const [loading, setLoading] = useState(true);
-	const [currentPage, setCurrentPage] = useState(1);
+	const [currentPage, setCurrentPage] = useState(pageParam);
 	const [totalCount, setTotalCount] = useState(0);
 
 	useEffect(() => {
+		router.replace(`?page=${currentPage}`);
+	}, [currentPage, router]);
+
+	useEffect(() => {
+		scrollTo(0, 0);
+
 		const fetchData = async () => {
 			setLoading(true);
 			try {
@@ -53,16 +62,16 @@ export default function NoteCards() {
 								<div className="flex justify-between items-center mb-2 cursor-pointer">
 									<a
 										onClick={() => router.push(`notes/${note.notes_id}`)}
-										className="text-md font-semibold hover:underline hove1r:decoration-mygo-dark-color hover:text-mygo-dark-color decoration-2"
+										className="text-base sm:text-lg font-semibold hover:underline hove1r:decoration-mygo-dark-color hover:text-mygo-dark-color decoration-2"
 									>
 										{note.title}
 									</a>
 								</div>
-								<p className="line-clamp-3 text-sm mb-4">{note.content}</p>
-								<div className="text-sm text-gray-600">
+								<p className="line-clamp-3 text-sm sm:text-base mb-4">{note.content}</p>
+								<div className="text-sm sm:text-base text-gray-600">
 									<a
 										href="#"
-										className="text-md font-semibold text-mygo-dark-color decoration-2"
+										className="font-semibold text-mygo-dark-color decoration-2"
 									>
 										일반
 									</a>{" "}

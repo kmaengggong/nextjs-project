@@ -6,11 +6,14 @@
 		"dev": "next dev --turbopack",
 		"build": "next build",
 		"start": "next start",
-		"lint": "next lint"
+		"lint": "next lint",
+		"vercel-build": "npm run build"
 	},
 	"dependencies": {
+		"@supabase/supabase-js": "^2.49.4",
 		"@vercel/postgres": "^0.10.0",
 		"chart.js": "^4.4.8",
+		"chartjs-plugin-datalabels": "^2.2.0",
 		"clsx": "^2.1.1",
 		"framer-motion": "^12.1.0",
 		"motion": "^12.4.7",
