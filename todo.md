@@ -35,6 +35,7 @@
 ### TODO
 - skeleton design -> responsive
 - navbar design // disable when not visible
+- chara image modal
 
 
 
