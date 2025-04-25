@@ -1,7 +1,4 @@
-"use client";
-
 import { motion } from "framer-motion";
-import { useEffect } from "react";
 import Image from "next/image";
 
 interface ImageModalProps {

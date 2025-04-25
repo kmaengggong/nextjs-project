@@ -3,7 +3,8 @@
 import { CharaDetail } from "@/app/lib/definitions";
 import { useEffect, useRef, useState } from "react";
 import CharaCard from "./charaCard";
-import TestCard from "./testCard";
+import TestCard from "../temp/testCard";
+import CharaCardSkeleton from "./charaCardSkeleton";
 
 export default function CharaCards() {
 	const [charas, setCharas] = useState<CharaDetail[]>([]);
@@ -59,7 +60,7 @@ export default function CharaCards() {
 	return (
 		<>
 			{loading ? (
-				<>로딩</>
+				<CharaCardSkeleton />
 			) : (
 				charas.map((chara, index) => (
 					<CharaCard

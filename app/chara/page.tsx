@@ -1,8 +1,5 @@
-// "use client";
-
-// import FloatingText from "@/components/text/floatingText";
 import CharaCards from "@/components/chara/charaCards";
-// import { motion } from "motion/react";
+import FloatingText from "@/components/temp/floatingText";
 
 export default function CharaPage() {
 	return (

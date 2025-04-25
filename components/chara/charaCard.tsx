@@ -27,7 +27,7 @@ const CharaCard = forwardRef(function CharaCard(
 				ref={ref}
 				animate={{ rotateY: flip ? 0 : 180 }}
 				transition={{ duration: 0.7 }}
-				className="relative h-[60vh] sm:h-[80vh] mb-2 px-4 py-3 border rounded-lg border-mygo-dark-color backdrop-blur-lg text-gray-800 text-sm"
+				className="relative h-[70vh] sm:h-[80vh] mb-2 px-4 py-3 border rounded-lg border-mygo-dark-color backdrop-blur-lg text-gray-800 text-sm"
 				style={{ backgroundColor: hexToRGBA(chara.color, 0.5) }}
 			>
 				<motion.div
@@ -35,8 +35,8 @@ const CharaCard = forwardRef(function CharaCard(
 					animate={{ rotateY: flip ? 0 : 180 }}
 					className="absolute inset-0 mx-4 my-3 grid grid-cols-5 backface-hidden cursor-pointer"
 				>
-					<div className="w-full col-span-2">
-						<ImageComponent src={chara.chara_image} aspect="2/3" />
+					<div className="w-full col-span-2 overflow-hidden">
+						<ImageComponent src={chara.chara_image} />
 					</div>
 					<div
 						className="w-full col-span-3 ml-4 justify-between overflow-hidden"
@@ -67,11 +67,11 @@ const CharaCard = forwardRef(function CharaCard(
 					animate={{ rotateY: flip ? 180 : 0 }}
 					className="absolute inset-0 mx-4 my-3 grid grid-cols-5 backface-hidden cursor-pointer"
 				>
-					<div className="col-span-2 scale-x-[-1]">
+					<div className="w-full col-span-2 scale-x-[-1] overflow-hidden">
 						<ImageComponent src={chara.voice_image} aspect="2/3" />
 					</div>
 					<div
-						className="col-span-3 ml-4 flex flex-col w-full justify-between scale-x-[-1] overflow-hidden"
+						className="w-full col-span-3 ml-4 flex flex-col justify-between scale-x-[-1] overflow-hidden"
 						onClick={() => setFlip((prev) => !prev)}
 					>
 						<div className="text-gray-800 text-right break-words">
