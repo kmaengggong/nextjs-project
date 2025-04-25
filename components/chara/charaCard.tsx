@@ -42,7 +42,7 @@ const CharaCard = forwardRef(function CharaCard(
 						className="w-full col-span-3 ml-4 justify-between overflow-hidden"
 						onClick={() => setFlip((prev) => !prev)}
 					>
-						<div className="flex flex-col">
+						<div className="flex flex-col mr-4">
 							<div className="text-gray-800 break-words">
 								<p className="text-lg sm:text-xl font-semibold mb-2">
 									{chara.first_name} {chara.last_name}

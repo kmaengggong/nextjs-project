@@ -25,7 +25,7 @@ export default function ImageComponent({ src, aspect }: ImageComponentProps) {
 					src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/chara/${src}`}
 					alt={src}
 					fill
-					className="object-cover"
+					className="object-cover rounded-sm"
 					priority
 				/>
 			</div>
