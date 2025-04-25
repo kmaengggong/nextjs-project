@@ -58,7 +58,7 @@ export default function NoteCards() {
 				) : (
 					<div className="divide-y divide-mygo-dark-color">
 						{notes.map((note) => (
-							<div key={note.notes_id} className="px-6 py-4">
+							<div key={note.notes_id} className="px-4 py-3">
 								<div className="flex justify-between items-center mb-2 cursor-pointer">
 									<a
 										onClick={() => router.push(`notes/${note.notes_id}`)}

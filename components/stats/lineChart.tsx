@@ -140,7 +140,7 @@ const LineChart = () => {
 	}, [stats, width]);
 
 	return (
-		<div className="border rounded-lg border-mygo-dark-color bg-white/20  backdrop-blur-lg px-2">
+		<div className="border rounded-lg border-mygo-dark-color bg-white/20  backdrop-blur-lg px-4 py-3">
 			{loading ? <LineChartSkeleton /> : <canvas ref={canvasRef} />}
 		</div>
 	);

@@ -42,7 +42,7 @@ export default function GuestCards() {
 						<motion.div
 							layoutId={`guest-${guest.guest_id}`}
 							key={guest.guest_id}
-							className="mb-2 break-inside-avoid px-6 py-4 border rounded-lg border-mygo-dark-color backdrop-blur-lg text-gray-800 text-sm cursor-pointer"
+							className="mb-2 break-inside-avoid px-4 py-3 border rounded-lg border-mygo-dark-color backdrop-blur-lg text-gray-800 text-sm cursor-pointer"
 							style={{ backgroundColor: hexToRGBA(guest.color, 0.5) }}
 							onClick={() => setSelectedGuest(guest)}
 						>

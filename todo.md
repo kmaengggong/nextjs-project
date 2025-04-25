@@ -34,7 +34,7 @@
 
 ### TODO
 - skeleton design -> responsive
-- navbar design
+- navbar design // disable when not visible
 
 
 

@@ -1,7 +1,7 @@
 export default function NoteCardDetailSkeleton() {
 	return (
 		<div className="divide-y divide-mygo-dark-color animate-pulse">
-			<div className="px-6 py-4">
+			<div className="px-4 py-3">
 				<div className="flex justify-between mt-1 mb-2">
 					<div className="h-4 bg-gray-200/40 rounded w-1/3"></div>
 					<div className="h-4 bg-gray-200/40 rounded w-1/5"></div>

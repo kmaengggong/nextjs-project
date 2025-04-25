@@ -35,7 +35,7 @@ export default function NoteCardDetail({ id }: { id: string }) {
 			) : (
 				<div className="divide-y divide-mygo-dark-color">
 					{note && (
-						<div key={note.notes_id} className="px-6 py-4 min-h-[80vh]">
+						<div key={note.notes_id} className="px-4 py-3 min-h-[80vh]">
 							<div className="flex flex-row justify-between">
 								<p className="text-sm text-gray-600">
 									{formatDateLong(note.updated_at)}
