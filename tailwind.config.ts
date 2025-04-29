@@ -15,6 +15,7 @@ export default {
 
 				"mygo-color": "#77BBDD",
 				"mygo-dark-color": "#3377AA",
+				"mygo-darker-color": "#002233", 
 				"tomori-color": "#77BBDD",
 				"anon-color": "#FF8899",
 				"rana-color": "#77DD77",
@@ -29,7 +30,7 @@ export default {
 				"sakiko-color": "#7799CC",
 			},
 			fontFamily: {
-				main: ['"'],
+				bang: ["Softsoul Bold"],
 			},
 			screens: {
 				xs: "400px",

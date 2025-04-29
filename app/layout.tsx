@@ -25,7 +25,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 				if (currentScrollY > threshold2) {
 					setNavOpacityValue(1);
 				} else if (currentScrollY > threshold) {
-					setNavOpacityValue(0.8);
+					setNavOpacityValue(0.5);
 				} else {
 					setNavOpacityValue(0);
 				}
@@ -63,7 +63,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 							transition: "opacity 0.3s ease, transform 0.3s ease",
 							pointerEvents: navOpacityValue === 0 ? "none" : "auto",
 						}}
-						className="fixed top-[10px] left-1/2 -translate-x-1/2 z-50 bg-gray-800 rounded-lg"
+						// className="fixed top-[10px] left-1/2 -translate-x-1/2 z-50 bg-gray-800 rounded-lg"
+						className="fixed top-[10px] left-1/2 -translate-x-1/2 z-50 bg-mygo-darker-color rounded-lg"
 					>
 						<Navbar />
 					</motion.div>

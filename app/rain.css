@@ -2,7 +2,7 @@
 	position: absolute;
 	left: 0;
 	width: 100vw;
-	height: 400vh;
+	height: 500vh;
 	z-index: 2;
 	pointer-events: none;
 }
@@ -19,18 +19,18 @@
 	width: 15px;
 	height: 150px;
 	pointer-events: none;
-	animation: drop 0.5s linear infinite;
+	animation: drop 0.1s linear infinite;
 }
 
 @keyframes drop {
 	0% {
-		transform: translateY(100vh);
+		transform: translateY(200vh);
 	}
-	75% {
+	/* 75% {
 		transform: translateY(300vh);
-	}
+	} */
 	100% {
-		transform: translateY(350vh);
+		transform: translateY(400vh);
 	}
 }
 

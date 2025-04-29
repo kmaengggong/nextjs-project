@@ -4,6 +4,7 @@ import ScrollTracker from "@/components/temp/scrollTracker";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useState } from "react";
 import "./rain.css";
+import TypingText from "@/components/home/typingText";
 
 const makeItRain = () => {
 	const rainFront = document.querySelector(".rain.front-row");
@@ -23,13 +24,17 @@ const makeItRain = () => {
 			increment += randoFiver;
 
 			drops += `
-				<div class="drop" style="left: ${increment}%; bottom: ${randoFiver + randoFiver - 1 + 100}%; animation-delay: 0.${randoHundo}s; animation-duration: 0.5${randoHundo}s;">
+				<div class="drop" style="left: ${increment}%; bottom: ${
+				randoFiver + randoFiver - 1 + 100
+			}%; animation-delay: 0.${randoHundo}s; animation-duration: 0.5${randoHundo}s;">
 					<div class="stem" style="animation-delay: 0.${randoHundo}s; animation-duration: 0.5${randoHundo}s;"></div>
 					<div class="splat" style="animation-delay: 0.${randoHundo}s; animation-duration: 0.5${randoHundo}s;"></div>
 				</div>
 			`;
 			backDrops += `
-				<div class="drop" style="right: ${increment}%; bottom: ${randoFiver + randoFiver - 1 + 100}%; animation-delay: 0.${randoHundo}s; animation-duration: 0.5${randoHundo}s;">
+				<div class="drop" style="right: ${increment}%; bottom: ${
+				randoFiver + randoFiver - 1 + 100
+			}%; animation-delay: 0.${randoHundo}s; animation-duration: 0.5${randoHundo}s;">
 					<div class="stem" style="animation-delay: 0.${randoHundo}s; animation-duration: 0.5${randoHundo}s;"></div>
 					<div class="splat" style="animation-delay: 0.${randoHundo}s; animation-duration: 0.5${randoHundo}s;"></div>
 				</div>
@@ -42,82 +47,117 @@ const makeItRain = () => {
 };
 
 export default function HomePage() {
-	// 🔊 소리 버튼 상태
+	const texts = [
+		"This is a fan site for\n『Bang Dream!\nIt's MyGO!!!!!』",
+		"To fully enjoy it,\nI recommend turning off mute and listening to the sound.",
+	];
+	const texts2 = ["Then,", "Let's MyGO!!!!!"];
+
 	const [soundOn, setSoundOn] = useState(true);
 	const { scrollYProgress } = useScroll();
+	const [buttonHighlight, setButtonHighlight] = useState(false);
+	const [showSecondText, setShowSecondText] = useState(false);
+	const [hydrated, setHydrated] = useState(false); // 버튼 초기에 안보이도록
 
-	// 🌧️ 비 애니메이션 (스크롤 내릴 때 등장)
-	const rainOpacity = useTransform(scrollYProgress, [0.05, 0.7], [0, 1]);
-
-	// 🔊 소리 버튼 투명도 (스크롤할수록 사라짐)
-	const buttonOpacity = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
-
+	const rainOpacity = useTransform(scrollYProgress, [0.2, 0.8], [0, 1]);
+	const buttonOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
+	const letterOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
 	const pepeOpacity = useTransform(scrollYProgress, [1.5, 3], [0, 1]);
 
 	useEffect(() => {
 		makeItRain();
 	}, []);
 
-	const [buttonOpacityValue, setButtonOpacityValue] = useState<number>(1);
-	// const [navOpacityValue, setNavOpacityValue] = useState<number>(1);
+	// useEffect(() => {
+	// 	const unsubscribe = buttonOpacity.onChange((v: number) => {
+	// 		setButtonOpacityValue(v);
+	// 	});
+
+	// 	return () => {
+	// 		unsubscribe();
+	// 	};
+	// }, [buttonOpacity]);
 
 	useEffect(() => {
-		const unsubscribe = buttonOpacity.onChange((v: number) => {
-			setButtonOpacityValue(v);
-		});
-
-		return () => {
-			unsubscribe();
-		};
-	}, [buttonOpacity]);
-
-	useEffect(() => {
+		setHydrated(true);
 		const visitedBefore = localStorage.getItem("visited");
 
 		if (visitedBefore) {
-			// 방문한 적이 있으면 마지막 100vh로 이동
-			window.scrollTo(0, window.innerHeight * 3);
+			window.scrollTo(0, window.innerHeight * 4);
 		} else {
 			// 첫 방문 시 방문 기록 저장
 			localStorage.setItem("visited", "true");
 		}
 	}, []);
 
+	const handleFirstTypingDone = () => {
+		setButtonHighlight(true);
+
+		setTimeout(() => {
+			setButtonHighlight(false);
+			setShowSecondText(true);
+		}, 2000);
+	};
+
 	return (
-		<div className="h-[400vh] relative overflow-y-scroll scrollbar-hide">
-			{/* 🌧️ 비 애니메이션 */}
+		<div className="h-[500vh] relative overflow-y-scroll scrollbar-hide">
 			<motion.div className="rain-container" style={{ opacity: rainOpacity }}>
 				<div className="rain front-row"></div>
 				<div className="rain back-row"></div>
 			</motion.div>
 
-			{/* 🔊 소리 버튼 (우측 하단) */}
-			<motion.button
-				onClick={() => setSoundOn(!soundOn)}
-				style={{
-					position: "fixed",
-					bottom: "20px",
-					right: "20px",
-					width: "50px",
-					height: "50px",
-					borderRadius: "50%",
-					border: "2px solid white",
-					color: "white",
-					background: "transparent",
-					fontSize: "24px",
-					cursor: "pointer",
-					opacity: buttonOpacity,
-					pointerEvents: buttonOpacityValue === 0 ? "none" : "auto",
-				}}
-			>
-				{soundOn ? "🔊" : "🔇"}
-			</motion.button>
+			{hydrated && (
+				<motion.button
+					onClick={() => setSoundOn(!soundOn)}
+					style={{
+						position: "fixed",
+						bottom: "20px",
+						right: "20px",
+						width: "50px",
+						height: "50px",
+						borderRadius: "50%",
+						border: buttonHighlight ? "2px solid #00FFFF" : "2px solid white",
+						color: "white",
+						background: "transparent",
+						fontSize: "24px",
+						cursor: "pointer",
+						opacity: buttonOpacity,
+						pointerEvents: buttonOpacity.get() > 0.1 ? "auto" : "none",
+						transition: "all 0.5s ease-in-out",
+					}}
+				>
+					{soundOn ? "🔊" : "🔇"}
+				</motion.button>
+			)}
 
 			<ScrollTracker />
 
-			{/* 배경 그라데이션을 위한 섹션 */}
-			<div className="h-[100vh] bg-gradient-to-b from-black to-[#004466]"></div>
+			<div className="h-[200vh] bg-gradient-to-b from-black to-[#004466]">
+				<motion.div
+					style={{ opacity: letterOpacity }}
+					className="text-mygo-color px-4 py-3"
+				>
+					<TypingText
+						texts={texts}
+						speed={50}
+						startDelay={0}
+						onAllTextsDone={handleFirstTypingDone}
+					/>
+					{showSecondText && (
+						<motion.div
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							transition={{ duration: 1 }}
+							className="text-center pt-8"
+						>
+							<TypingText texts={texts2} speed={50} startDelay={0} />
+						</motion.div>
+					)}
+				</motion.div>
+			</div>
+
 			<div className="h-[200vh] bg-gradient-to-b from-[#004466] to-mygo-color"></div>
+
 			<div className="h-[100vh] bg-gradient-to-b from-mygo-color to-white"></div>
 		</div>
 	);

@@ -23,19 +23,28 @@
 - npm: recent
 
 ### 페이지
-/: music, rain, charas, logo -> simple but dynamic.  // no db
-/chara: each chara, text and link.  // no db
-/guest: guestbook and some animated things.  // db
-/stats: graph for loveline.  // db
-/notes: info about goods or events.  // db + crawling
-/about: simple self-produce page.  // no db
-/ccmbr: hidden page for ave mujica. with mutsumi.  // no db
+- homes: text(d) -> rain, music -> nav, logo, image.
+- chara: card(image, text, link) / actor flip(d)
+- notes: card(title, content) => detail 
+- stats: graph -> select with image
+- guest: card(content, name) / detail(d)
+- about: simple
+- ccmbr: knock knock / select -> chara
 
 
 ### TODO
-- skeleton design -> responsive
-- navbar design // disable when not visible
-- chara image modal
+- all: skeleton design -> responsive
+- layout: navbar desgin + logo
+- db: reset and go
+- home: image
+- chara: image
+- notes: web crawling and get and post -> automatic or admin page
+- guest: add. need color, input, etc...
+- stats: select with image
+- about: later. not important
+
+
+
 
 
 
