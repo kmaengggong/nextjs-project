@@ -1,5 +1,4 @@
 import CharaCards from "@/components/chara/charaCards";
-import FloatingText from "@/components/temp/floatingText";
 
 export default function CharaPage() {
 	return (
@@ -8,10 +7,6 @@ export default function CharaPage() {
 
 			<div className="relative">
 				<CharaCards />
-
-				{/* {[...Array(100)].map((_, index) => (
-					<FloatingText key={index}>아논소요</FloatingText>
-				))} */}
 			</div>
 		</div>
 	);

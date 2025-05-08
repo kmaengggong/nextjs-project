@@ -29,6 +29,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 				} else {
 					setNavOpacityValue(0);
 				}
+			} else if (pathname === "/chara") {
+				if (currentScrollY == 0) {
+					setNavOpacityValue(1);
+				} else{
+					setNavOpacityValue(0);
+				}
 			} else {
 				if (currentScrollY <= 0) {
 					setNavOpacityValue(1);
@@ -69,7 +75,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 						<Navbar />
 					</motion.div>
 					<div className="relative z-10">{children}</div>
-					<Footer />
+					{pathname !== "/chara" && <Footer />}
 				</div>
 			</body>
 		</html>
