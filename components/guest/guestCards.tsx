@@ -6,34 +6,54 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import GuestCardSkeleton from "./guestCardSkeleton";
 import GuestModal from "./guestModal";
+import GuestRegist from "./guestRegist";
 
 export default function GuestCards() {
 	const [guests, setGuests] = useState<Guest[]>([]);
 	const [loading, setLoading] = useState(true);
 	const [selectedGuest, setSelectedGuest] = useState<Guest | null>(null);
 
-	useEffect(() => {
-		const fetchData = async () => {
-			setLoading(true);
-			try {
-				const res = await fetch(`/api/guest`);
-				if (res.ok) {
-					const json = await res.json();
-					setGuests(json);
-				} else {
-					alert("Failed to fetch guest");
-				}
-			} catch (error) {
-				console.error("Fetch error: ", error);
-			} finally {
-				setLoading(false);
+	const fetchData = async () => {
+		setLoading(true);
+		try {
+			const res = await fetch(`/api/guest`);
+			if (res.ok) {
+				const json = await res.json();
+				setGuests(json);
+			} else {
+				alert("Failed to fetch guest");
 			}
-		};
+		} catch (error) {
+			console.error("Fetch error: ", error);
+		} finally {
+			setLoading(false);
+		}
+	};
+
+	useEffect(() => {
 		fetchData();
 	}, []);
 
 	return (
 		<>
+			{/* <div className="grid grid-cols-3 gap-2 max-sm:grid-cols-2">
+				{loading ? (
+					<GuestCardSkeleton />
+				) : (
+					guests.map((guest) => (
+						<motion.div
+							layoutId={`guest-${guest.guest_id}`}
+							key={guest.guest_id}
+							className="px-4 py-3 border rounded-lg border-mygo-dark-color backdrop-blur-lg text-gray-800 text-sm cursor-pointer"
+							style={{ backgroundColor: hexToRGBA(guest.color, 0.5) }}
+							onClick={() => setSelectedGuest(guest)}
+						>
+							<p className="break-words mb-4">{guest.content}</p>
+							<p className="font-semibold text-right">- {guest.temp_name}</p>
+						</motion.div>
+					))
+				)}
+			</div> */}
 			<div className="columns-3 gap-2 max-sm:columns-2">
 				{loading ? (
 					<GuestCardSkeleton />
@@ -47,9 +67,7 @@ export default function GuestCards() {
 							onClick={() => setSelectedGuest(guest)}
 						>
 							<p className="break-words mb-4">{guest.content}</p>
-							<p className="font-semibold text-right">
-								- {guest.temp_name}
-							</p>
+							<p className="font-semibold text-right">- {guest.temp_name}</p>
 						</motion.div>
 					))
 				)}
@@ -63,6 +81,8 @@ export default function GuestCards() {
 					/>
 				)}
 			</AnimatePresence>
+
+			<GuestRegist onSuccess={fetchData} />
 		</>
 	);
 }

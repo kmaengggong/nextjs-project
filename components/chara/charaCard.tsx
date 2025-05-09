@@ -27,7 +27,7 @@ const CharaCard = forwardRef(function CharaCard(
 				ref={ref}
 				animate={{ rotateY: flip ? 0 : 180 }}
 				transition={{ duration: 0.7 }}
-				className="relative h-[80vh] sm:h-[90vh] mb-2 px-4 py-3 border rounded-lg border-mygo-dark-color backdrop-blur-lg text-gray-800 text-sm"
+				className="relative h-[80vh] px-4 py-3 border rounded-lg border-mygo-dark-color backdrop-blur-lg text-gray-800 text-sm"
 				style={{ backgroundColor: hexToRGBA(chara.color, 0.5) }}
 			>
 				<motion.div

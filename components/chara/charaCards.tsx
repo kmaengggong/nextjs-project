@@ -105,6 +105,7 @@ export default function CharaCards() {
 						/>
 						</div>
 					))}
+					<div className="h-[20vh] shrink-0" />
 				</div>
 			)}
 		</>

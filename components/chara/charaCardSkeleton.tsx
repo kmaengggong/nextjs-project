@@ -1,6 +1,6 @@
 export default function CharaCardSkeleton() {
 	return (
-		<div className="mb-2 h-[70vh] sm:h-[80vh] px-4 py-3 border rounded-lg border-mygo-dark-color bg-white/20 backdrop-blur-lg animate-pulse">
+		<div className="mb-2 h-[80vh] px-4 py-3 border rounded-lg border-mygo-dark-color bg-white/20 backdrop-blur-lg animate-pulse">
 			<div className="absolute inset-0 mx-4 my-3 grid grid-cols-5 0">
 				<div className="w-full col-span-2 bg-gray-200/40 rounded"></div>
 				<div className="w-full col-span-3 ml-4">
