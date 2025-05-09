@@ -128,35 +128,45 @@ export default function Navbar() {
 							animate={isMenuOpen ? "open" : "closed"}
 						>
 							{!isMenuOpen ? (
-								<svg
-									width="24"
-									height="24"
-									viewBox="0 0 24 24"
-									fill="none"
-									xmlns="http://www.w3.org/2000/svg"
-								>
-									<path
-										fillRule="evenodd"
-										clipRule="evenodd"
-										d="M3 5H21C21.553 5 22 5.447 22 6C22 6.553 21.553 7 21 7H3C2.447 7 2 6.553 2 6C2 5.447 2.447 5 3 5ZM3 12H21C21.553 12 22 12.447 22 13C22 13.553 21.553 14 21 14H3C2.447 14 2 13.553 2 13C2 12.447 2.447 12 3 12ZM3 19H21C21.553 19 22 19.447 22 20C22 20.553 21.553 21 21 21H3C2.447 21 2 20.553 2 20C2 19.447 2.447 19 3 19Z"
-										fill="white"
-									/>
-								</svg>
+								<img
+								src="/icons/menu-burger.svg"
+								alt="pencil"
+								className="w-6 h-6 filter invert"
+							/>
+								// <svg
+								// 	width="24"
+								// 	height="24"
+								// 	viewBox="0 0 24 24"
+								// 	fill="none"
+								// 	xmlns="http://www.w3.org/2000/svg"
+								// >
+								// 	<path
+								// 		fillRule="evenodd"
+								// 		clipRule="evenodd"
+								// 		d="M3 5H21C21.553 5 22 5.447 22 6C22 6.553 21.553 7 21 7H3C2.447 7 2 6.553 2 6C2 5.447 2.447 5 3 5ZM3 12H21C21.553 12 22 12.447 22 13C22 13.553 21.553 14 21 14H3C2.447 14 2 13.553 2 13C2 12.447 2.447 12 3 12ZM3 19H21C21.553 19 22 19.447 22 20C22 20.553 21.553 21 21 21H3C2.447 21 2 20.553 2 20C2 19.447 2.447 19 3 19Z"
+								// 		fill="white"
+								// 	/>
+								// </svg>
 							) : (
-								<svg
-									width="24"
-									height="24"
-									viewBox="0 0 24 24"
-									fill="none"
-									xmlns="http://www.w3.org/2000/svg"
-								>
-									<path
-										fillRule="evenodd"
-										clipRule="evenodd"
-										d="M11 4C11 3.44772 11.4477 3 12 3C12.5523 3 13 3.44772 13 4V11H20C20.5523 11 21 11.4477 21 12C21 12.5523 20.5523 13 20 13H13V20C13 20.5523 12.5523 21 12 21C11.4477 21 11 20.5523 11 20V13H4C3.44772 13 3 12.5523 3 12C3 11.4477 3.44772 11 4 11H11V4Z"
-										fill="white"
-									/>
-								</svg>
+								<img
+					src="/icons/plus.svg"
+					alt="pencil"
+					className="w-6 h-6 filter invert"
+				/>
+								// <svg
+								// 	width="24"
+								// 	height="24"
+								// 	viewBox="0 0 24 24"
+								// 	fill="none"
+								// 	xmlns="http://www.w3.org/2000/svg"
+								// >
+								// 	<path
+								// 		fillRule="evenodd"
+								// 		clipRule="evenodd"
+								// 		d="M11 4C11 3.44772 11.4477 3 12 3C12.5523 3 13 3.44772 13 4V11H20C20.5523 11 21 11.4477 21 12C21 12.5523 20.5523 13 20 13H13V20C13 20.5523 12.5523 21 12 21C11.4477 21 11 20.5523 11 20V13H4C3.44772 13 3 12.5523 3 12C3 11.4477 3.44772 11 4 11H11V4Z"
+								// 		fill="white"
+								// 	/>
+								// </svg>
 							)}
 						</motion.div>
 					</div>

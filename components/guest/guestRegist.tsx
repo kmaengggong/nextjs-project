@@ -112,7 +112,6 @@ export default function GuestRegist({ onSuccess }: GuestRegistProps) {
 											}
 										}}
 										className="w-full px-3 py-2 rounded-md border border-mygo-dark-color placeholder-gray-400 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-mygo-dark-color backdrop-blur"
-										style={{ backgroundColor: hexToRGBA("white", 0.7) }}
 										maxLength={200}
 									/>
 									{/* 글자 수 표시 */}

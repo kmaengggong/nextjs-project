@@ -33,15 +33,19 @@
 
 
 ### TODO
-- all: skeleton design -> responsive
-- layout: navbar desgin + logo
-- db: reset and go
-- home: image
-- chara: image
-- notes: web crawling and get and post -> automatic or admin page
-- guest: add. need color, input, etc...
-- stats: select with image
-- about: later. not important
+- navbar 로고
+- 스켈레톤 responsive
+- 전체적인 폰트? -> 특히 navbar 사이트명
+- 언어
+- 커스텀 alert
+- home: 각종 이미지, 음악, 버튼 svg 등등
+- chara: 이미지랑 설명, URL
+- notes: 웹크롤링 -> 자동? 혹은 admin 페이지
+- stats: select 시 이미지 나오도록
+- guest: 
+- about: 나중
+- ccmbr: 나중
+- https://www.flaticon.com/uicons/interface-icons
 
 
 
